@@ -1,5 +1,6 @@
 <h1>PHP Test Application</h1>
 
+<h2>Users</h2>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -19,6 +20,8 @@
 	</tbody>
 </table>
 
+
+<h2>Add user</h2>
 <form method="post" action="create.php" class="form-horizontal">
 
   <div class="form-group">
@@ -44,7 +47,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-   <button class="btn btn-default">Create new row</button>
+   <button class="btn btn-primary btn-lg">Create new row</button>
     </div>
   </div>
 </form>
