@@ -19,16 +19,32 @@
 	</tbody>
 </table>
 
-<form method="post" action="create.php">
+<form method="post" action="create.php" class="form-horizontal">
 
-	<label for="name">Name:</label>
-	<input name="name" input="text" id="name"/>
+  <div class="form-group">
+ <label for="name" class="col-sm-1 control-label">Name:</label>
+    <div class="col-sm-11">
+   <input name="name" input="text" id="name" class="form-control"/>
+    </div>
+  </div>
 
-	<label for="email">E-mail:</label>
-	<input name="email" input="text" id="email"/>
+  <div class="form-group">
+ <label for="email" class="col-sm-1 control-label">E&#8209;mail:</label>
+    <div class="col-sm-11">
+      <input name="email" input="text" id="email" class="form-control"/>
+    </div>
+  </div>
 
-	<label for="city">City:</label>
-	<input name="city" input="text" id="city"/>
+  <div class="form-group">
+  <label for="city" class="col-sm-1 control-label">City:</label>
+    <div class="col-sm-11">
+   <input name="city" input="text" id="city" class="form-control"/>
+    </div>
+  </div>
 
-	<button>Create new row</button>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-11">
+   <button class="btn btn-default">Create new row</button>
+    </div>
+  </div>
 </form>
