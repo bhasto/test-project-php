@@ -1,6 +1,6 @@
 function searchUsersByCity(city) {
   return $.ajax({
-    url: '/api/users.php',
+    url: '/search.php',
     dataType: 'json',
     data: {
       city: window.encodeURI(city)

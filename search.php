@@ -1,6 +1,6 @@
 <?php
 
-$app = require '../core/app.php';
+$app = require './core/app.php';
 
 $city = isset($_GET['city']) ? $_GET['city'] : NULL;
 
