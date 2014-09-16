@@ -42,9 +42,11 @@ $validationResult = validateUser($data);
 if ($validationResult['valid']) {
   $user = new User($app->db);
   $user->insert($data);
+  http_response_code(303);
   header('Location: index.php');
 } else {
   $users = User::find($app->db, '*');
+  http_response_code(400);
   $app->renderView('index', array(
 	  'users' => $users,
     'errorCodes' => $validationResult['errorCodes'],
