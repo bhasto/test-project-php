@@ -21,7 +21,7 @@ function renderUser(user) {
 }
 
 function createCitySearchForm() {
-  return $('<form class="form-inline"><label for="filter-city">City</label> <input input="text" name="city" id="city-filter" class="form-control input-sm" placeholder="Enter city to filter"/>');
+  return $('<form class="form-inline"><label for="city-filter">City</label> <input input="text" name="city" id="city-filter" class="form-control input-sm" placeholder="Enter city to filter"/>');
 }
 
 $(document).ready(function() {
