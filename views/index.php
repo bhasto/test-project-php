@@ -6,10 +6,10 @@
 		<tr>
 			<th>Name</th>
 			<th>E-mail</th>
-			<th>City</th>
+			<th id="city-header">City</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="users">
 		<?php foreach($users as $user){?>
 		<tr>
 			<td><?=$user->getName()?></td>

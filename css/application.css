@@ -2,3 +2,7 @@
    content: "*";
    color: #a94442;
 }
+
+#filter-city {
+  width: auto;
+}
