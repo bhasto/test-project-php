@@ -26,11 +26,11 @@ class User extends BaseModel{
 
   public static function findByCity($db, $city) {
     $select = self::buildSelect('*');
-    $query = 'SELECT ' . $select . ' FROM `' . self::tableName .'` WHERE `city` LIKE ' . self::escapeValue($city . '%');
+    $query = 'SELECT ' . $select . ' FROM `' . self::tableName .'` WHERE `city` LIKE ' . self::escapeValue($city . '%') . ' ORDER BY `created_at` ASC';
     return self::sql($db, $query);
   }
 
   public static function findAll($db) {
-    return self::find($db, '*');
+    return self::find($db, '*', array(), array('`created_at`' => 'ASC'));
   }
 }
