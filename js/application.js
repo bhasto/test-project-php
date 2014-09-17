@@ -1,10 +1,23 @@
+function findAllUsers() {
+  return searchUsersByCity('');
+}
+
 function searchUsersByCity(city) {
   return $.ajax({
     url: '/search.php',
     dataType: 'json',
     data: {
-      city: window.encodeURI(city)
+      city: encodeURI(city)
     }
+  }).promise();
+}
+
+function saveUser(user) {
+  return $.ajax({
+    url: '/create.php',
+    type: 'POST',
+    dataType: 'html',
+    data: user
   }).promise();
 }
 
@@ -27,16 +40,76 @@ function createCitySearchForm() {
 $(document).ready(function() {
   $('#city-header').empty().append(createCitySearchForm());
 
-  var $input = $('#city-filter');
-
-  var cities = Rx.Observable.fromEvent($input, 'keyup')
+  var usersByCity = Rx.Observable.fromEvent($('#city-filter'), 'input')
     .map(function (e) {
       return e.target.value
     })
     .throttle(500)
-    .distinctUntilChanged();
+    .distinctUntilChanged()
+    .map(function(city) {
+      return Rx.Observable.fromPromise(searchUsersByCity(city));
+    })
+    .switch();
 
-  var users = cities.flatMapLatest(searchUsersByCity);
+
+  var $userForm = $('#user-form');
+
+  $userForm.bootstrapValidator({
+    fields: {
+      name: {
+        validators: {
+          notEmpty: {
+            message: 'Invalid name'
+          }
+        }
+      },
+
+      email: {
+        validators: {
+          notEmpty: {
+            message: 'Invalid e-mail'
+          },
+
+          emailAddress: {
+            message: 'Invalid e-mail'
+          }
+        }
+      },
+
+      city: {
+        validators: {
+          notEmpty: {
+            message: 'Invalid city'
+          }
+        }
+      }
+    }
+  });
+
+
+  var usersAfterSave = Rx.Observable.fromEvent($userForm, 'success.form.bv')
+    .do(function(e) {
+      e.preventDefault();
+    })
+    .map(function(e) {
+      return {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        city: $('#city').val()
+      };
+    })
+    .flatMap(function(user) {
+      return Rx.Observable.fromPromise(saveUser(user));
+    })
+    .do(function() {
+      $userForm.data('bootstrapValidator').resetForm(true)
+    })
+    .flatMap(function() {
+      return Rx.Observable.fromPromise(findAllUsers());
+    });
+
+
+  var users = Rx.Observable.merge(usersAfterSave, usersByCity);
 
   users.subscribe(function(data) {
     $('#users').empty().append(renderUsers(data));

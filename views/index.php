@@ -22,7 +22,7 @@
 
 
 <h2>Add user</h2>
-<form method="post" action="create.php" class="form-horizontal">
+<form method="post" action="create.php" class="form-horizontal" id="user-form">
 
   <?php if (isset($errorCodes)){ ?>
   <?php $errorCodeToMessage = array('name' => 'Invalid name', 'email' => 'Invalid e-mail', 'city' => 'Invalid city'); ?>
@@ -58,7 +58,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-      <button class="btn btn-primary btn-lg">Create new row</button>
+      <button type="submit" id="user-submit" class="btn btn-primary btn-lg">Create new row</button>
     </div>
   </div>
 </form>

@@ -25,7 +25,8 @@ class User extends BaseModel{
 	}
 
   public static function findByCity($db, $city) {
-    $query = "SELECT `id`, `name`, `email`, `city` FROM `users` WHERE `city` LIKE " . self::escapeValue($city . '%');
+    $select = self::buildSelect('*');
+    $query = 'SELECT ' . $select . ' FROM `' . self::tableName .'` WHERE `city` LIKE ' . self::escapeValue($city . '%');
     return self::sql($db, $query);
   }
 
